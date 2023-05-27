@@ -1,6 +1,18 @@
-import 'package:baumfinder/app/app.dart';
-import 'package:baumfinder/bootstrap.dart';
+import 'package:baumfinder/firebase_options_staging.dart';
+import 'package:baumfinder/main_shared.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/widgets.dart';
 
-void main() {
-  bootstrap(() => const App());
+
+Future<void> main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint("Firebase couldn't be initialized: $e");
+  }
+
+  await main_shared();
 }
